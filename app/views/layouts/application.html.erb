@@ -32,7 +32,9 @@
   			<li><a href="https://www.facebook.com">Instagram</a></li>
   			<li><a href="https://www.facebook.com">Youtube</a></li>
   		</ul>
-  		<p class="sign_in">Admin Login</p>
+      <% if !user_signed_in? %>
+  	     <p class="sign_in">Admin Login</p>
+      <% end -%>
   	</div>
   	<div id="main_content">
   		<div id="header">
@@ -41,8 +43,9 @@
         <% elsif current_page?(about_path) %>
           <p>About</p>
         <% else %>
-          <%= link_to "Back to all posts", root_path%>
+          <%= link_to "Back to All Posts", root_path%>
         <% end %>
+        <% if user_signed_in? %>
   		  <div class="buttons">
   				<button class="button">
   					<%= link_to "New Post", new_post_path %>
@@ -51,6 +54,7 @@
   					Log Out
   				</button>
   			</div>
+        <% end -%>
   		</div>
   	<% flash.each do |name, msg|%>
   		<% content_tag(:div, msg, class: "alert")%>
