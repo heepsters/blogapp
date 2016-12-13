@@ -3,7 +3,7 @@ class PostsController < ApplicationController
 		@posts = Post.all.order('created_at DESC')
 	end
 	def new
-		
+		@post = Post.new
 	end
 	def create
 		@post = Post.new(post_params)
@@ -11,8 +11,7 @@ class PostsController < ApplicationController
 		if @post.save
 			redirect_to @post
 		else
-			flash[:alert] = "Post did not save"
-			redirect_to new_post_path
+			render 'new'
 		end
 	end
 
